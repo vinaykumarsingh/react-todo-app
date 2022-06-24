@@ -4,6 +4,11 @@ import HomeView from "../View/HomeView";
 
 const HomeController = () => {
     const listsInController = useSelector(state=> state.listReducer.lists, shallowEqual)
+    // const listsInController = useSelector(state=> {
+    //     // console.log(state.listReducer.lists)
+    //     return state.listReducer.lists
+    // }, shallowEqual)
+
     return(
         <div className="listsContainer">
             <HomeView lists = {listsInController}/>

@@ -85,11 +85,26 @@
   color: #fff;
   padding: 10px;
   border-radius: 10px;
-  width: 80%;
+  width: 40%;
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 28px;
   min-height: 200px;
   margin-bottom: 20px;
+}
+
+.listDetailContainer {
+  background: #3e5a48;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 28px;
+  min-height: 200px;
+  margin-bottom: 20px;
+}
+.listContainer:hover {
+  cursor: pointer;
 }
 
 .listContainer h2 {

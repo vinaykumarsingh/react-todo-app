@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const ListDetailsView = ({ list, completeTask, handleDND, redirectHome }) => {
     const itemToRender =
-        <div className="listContainer">
+        <div className="listDetailContainer">
             <div className="listTitleContainer">
                 <h2>{list.listTitle}</h2>
 
