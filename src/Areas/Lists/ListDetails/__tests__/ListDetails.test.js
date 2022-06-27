@@ -3,9 +3,90 @@ import ListDetailsView from "../View/ListDetailsView";
 import * as reactRedux from 'react-redux';
 import ListDetailsController from "../Controller/ListDetailsController";
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import "@testing-library/jest-dom/extend-expect";
+
+const mockedUseNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+   useNavigate: () => mockedUseNavigate,
+ }));
+
+ jest.mock("react-redux", () => ({
+    useSelector: jest.fn(),
+    useDispatch: jest.fn(),
+}));
+
+
+describe("ListDetailsController Works !", () => {
+    const mockStore = {
+        "listReducer": {
+            "lists": [
+                {
+                    "id": 1,
+                    "listTitle": "Team 1",
+                    "taskDetails": [
+                        {
+                            "dueDate": "2022-07-03",
+                            "index": 0.4653066358719111,
+                            "name": "Check Timesheet",
+                            "status": "Completed",
+                            "taskDetails": "Check Timesheet and send the report",
+                            "backgroundColor": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    beforeEach(() => {
+        useDispatchMock.mockImplementation(() => () => {});
+        useSelectorMock.mockImplementation(selector => selector(mockStore));
+    })
+    afterEach(() => {
+        useDispatchMock.mockClear();
+        useSelectorMock.mockClear();
+    })
+
+    const useSelectorMock = reactRedux.useSelector;
+    const useDispatchMock = reactRedux.useDispatch;
+
+
+    test("Render ListDetail component on passing Lists prps", ()=> {
+
+        Object.defineProperty(window, "location", {
+            value: {
+                pathname: '/1'
+            },
+            writable: true
+        });
+        
+        const { getAllByRole, getByText, queryAllByTestId, getByTestId} = render(<ListDetailsController /> )
+
+        expect(getByText('Team 1')).toBeInTheDocument();
+        expect(getAllByRole('list')).toHaveLength(2)
+        expect(queryAllByTestId("taskDetailRow")).toHaveLength(1);
+        expect(getByTestId('taskDetailRow').firstChild.textContent).toBe('Check Timesheet')
+    })
+
+    test("ListDetail component complete button click", async ()=> {
+
+        Object.defineProperty(window, "location", {
+            value: {
+                pathname: '/1'
+            },
+            writable: true
+        });
+        
+        const { getByTestId} = render(<ListDetailsController /> )
+        expect(getByTestId('taskDetailRow').lastChild.textContent).toBe('Complete');
+    })
+});
+
+
 
 describe("ListDetailsView works", () => {
-    test('render ListDetail View component', () => {
+    test('Render ListDetail View component', () => {
         const list = {
             "id": 1,
             "listTitle": "Team 1",

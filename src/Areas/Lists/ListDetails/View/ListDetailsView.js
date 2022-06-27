@@ -44,6 +44,7 @@ const ListDetailsView = ({ list, completeTask, handleDND, redirectHome }) => {
                                                     ref={provided.innerRef}
                                                     {...provided.dragHandleProps}
                                                     key={task.index}
+                                                    data-testid="taskDetailRow"
                                                     className={
                                                         `${snapshot.isDragging ? "selected" : task.bgColor} `
                                                     }

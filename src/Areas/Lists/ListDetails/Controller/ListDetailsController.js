@@ -1,7 +1,6 @@
 import React from "react";
 import ListDetailsView from "../View/ListDetailsView";
 import { useSelector, shallowEqual } from "react-redux";
-import { useLocation } from 'react-router';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { completeTaskAction, DNDListsAction } from '../../../../Common/Redux/Actions/ListAction'
@@ -9,11 +8,13 @@ import { completeTaskAction, DNDListsAction } from '../../../../Common/Redux/Act
 const ListDetailsController = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    let location = useLocation();
-    let id = location.pathname.substr(1)
+
+    let id = window.location.pathname.substring(1);
+
     let list = useSelector(state => state.listReducer, shallowEqual).lists.filter(list => {
         return list.id === Number(id)
     })
+
     const listToRender = Object.assign({}, list[0])
 
     listToRender.taskDetails.map((task, id) => {
@@ -45,7 +46,7 @@ const ListDetailsController = () => {
     }
 
     const handleDragDrop = (result) => {
-        console.log(result);
+        // console.log(result);
         if (!result.destination) return; //if no destination exits(cancel event), exit this function
         const [reorderedItem] = listToRender.taskDetails.splice(result.source.index, 1);
         listToRender.taskDetails.splice(result.destination.index, 0, reorderedItem);
