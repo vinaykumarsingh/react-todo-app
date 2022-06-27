@@ -1,4 +1,4 @@
-import ListModel from '../../../Areas/Lists/CreateList/Models/ListModel'
+import ListModel from '../../Constants/ListModel'
 
 const initialState = {
     lists: [...ListModel]
