@@ -46,7 +46,6 @@ const ListDetailsController = () => {
     }
 
     const handleDragDrop = (result) => {
-        // console.log(result);
         if (!result.destination) return; //if no destination exits(cancel event), exit this function
         const [reorderedItem] = listToRender.taskDetails.splice(result.source.index, 1);
         listToRender.taskDetails.splice(result.destination.index, 0, reorderedItem);

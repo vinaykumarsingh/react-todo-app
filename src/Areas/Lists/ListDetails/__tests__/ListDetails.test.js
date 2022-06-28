@@ -9,10 +9,10 @@ const mockedUseNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
-   useNavigate: () => mockedUseNavigate,
- }));
+    useNavigate: () => mockedUseNavigate,
+}));
 
- jest.mock("react-redux", () => ({
+jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
     useDispatch: jest.fn(),
 }));
@@ -40,7 +40,7 @@ describe("ListDetailsController Works !", () => {
         }
     }
     beforeEach(() => {
-        useDispatchMock.mockImplementation(() => () => {});
+        useDispatchMock.mockImplementation(() => () => { });
         useSelectorMock.mockImplementation(selector => selector(mockStore));
     })
     afterEach(() => {
@@ -52,7 +52,7 @@ describe("ListDetailsController Works !", () => {
     const useDispatchMock = reactRedux.useDispatch;
 
 
-    test("Render ListDetail component on passing Lists prps", ()=> {
+    test("Render ListDetail component on passing Lists prps", () => {
 
         Object.defineProperty(window, "location", {
             value: {
@@ -60,8 +60,8 @@ describe("ListDetailsController Works !", () => {
             },
             writable: true
         });
-        
-        const { getAllByRole, getByText, queryAllByTestId, getByTestId} = render(<ListDetailsController /> )
+
+        const { getAllByRole, getByText, queryAllByTestId, getByTestId } = render(<ListDetailsController />)
 
         expect(getByText('Team 1')).toBeInTheDocument();
         expect(getAllByRole('list')).toHaveLength(2)
@@ -69,7 +69,7 @@ describe("ListDetailsController Works !", () => {
         expect(getByTestId('taskDetailRow').firstChild.textContent).toBe('Check Timesheet')
     })
 
-    test("ListDetail component complete button click", async ()=> {
+    test("ListDetail component complete button click", async () => {
 
         Object.defineProperty(window, "location", {
             value: {
@@ -77,8 +77,8 @@ describe("ListDetailsController Works !", () => {
             },
             writable: true
         });
-        
-        const { getByTestId} = render(<ListDetailsController /> )
+
+        const { getByTestId } = render(<ListDetailsController />)
         expect(getByTestId('taskDetailRow').lastChild.textContent).toBe('Complete');
     })
 });

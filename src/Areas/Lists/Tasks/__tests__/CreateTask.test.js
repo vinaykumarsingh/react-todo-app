@@ -7,30 +7,34 @@ describe('Create Task', () => {
         let props = {
             "taskDetails": [
                 {
-                    "index": 0.9777250691653807,
-                    "name": "w",
-                    "taskDetails": "e",
-                    "status": "Not Started",
+                    "index": 0.34044920454314087,
+                    "name": "",
+                    "taskDetails": "",
+                    "status": "",
                     "dueDate": ""
                 }
-            ]
+            ],
+            "listTitle": "",
+            "isFormValid": true,
+            "invaidFormField": ""
         }
 
-        const { container, getAllByRole } = render(<CreateTaskView {...props} />)
-
+        const { getAllByRole } = render(<CreateTaskView {...props} />)
+        
         const textboxs = getAllByRole('textbox')
-        expect(textboxs).toHaveLength(2)
+        expect(textboxs).toHaveLength(3)
 
         const comboboxs = getAllByRole('combobox')
         expect(comboboxs).toHaveLength(1)
 
         const buttons = getAllByRole('button')
-        expect(buttons).toHaveLength(1)
+        expect(buttons).toHaveLength(2) // add and submit
 
     });
 
-    test('Render Create Task Component', () => {
+    test('Button Click on Create Task Component', () => {
         const add = jest.fn();
+        const handleSubmit = jest.fn(e => e.preventDefault());
         let props = {
             "taskDetails": [
                 {
@@ -41,16 +45,17 @@ describe('Create Task', () => {
                     "dueDate": ""
                 }
             ],
-            'add':add
+            'add':add,
+            'handleSubmit':handleSubmit
         }
 
-        const { container, getAllByRole, getByRole } = render(<CreateTaskView {...props} />) 
+        const { getByText } = render(<CreateTaskView {...props} />) 
 
-        const buttons = getAllByRole('button')
-        expect(buttons).toHaveLength(1)
-
-        fireEvent.click(getByRole('button'))
+        fireEvent.click(getByText('Add'))
         expect(props.add).toHaveBeenCalledTimes(1)
+
+        fireEvent.click(getByText('Submit'))
+        expect(props.handleSubmit).toHaveBeenCalledTimes(1)
 
     });
 })

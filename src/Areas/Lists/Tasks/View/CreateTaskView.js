@@ -1,12 +1,13 @@
 import React from "react";
 
 const CreateTaskView = props => {
-    return props.taskDetails.map((val, idx) => {
+
+    const itemToRender = props.taskDetails.map((val, idx) => {
         let name = `name-${idx}`,
             taskDetails = `taskDetails-${idx}`,
             dueDate = `dueDate-${idx}`,
-            status = `status-${idx}`
-            
+            status = `status-${idx}`;
+
         return (
             <div className="form-row" key={val.index}>
                 <div className="col">
@@ -53,7 +54,75 @@ const CreateTaskView = props => {
                     )}
                 </div>
             </div>
-        );
-    });
+        )
+    })
+
+    const { listTitle, isFormValid, invaidFormField } = props
+
+    return (
+        <form onSubmit={props.handleSubmit} onChange={props.handleChange}>
+            <div className="row" style={{ marginTop: 20 }}>
+                <div className="col-sm-1" />
+                <div className="col-sm-10">
+                    <h2 className="text-center"> Create Your TODO</h2>
+                    <div className="container toDoFormContainer">
+                        <div className="row headerRow">
+                            <div className="col">
+                                <label>List Title</label>
+                            </div>
+
+                        </div>
+                        <div className="row">
+                            <div className="col-8">
+                                <input
+                                    type="text"
+                                    className="form-control required"
+                                    placeholder="List Title"
+                                    name="listTitle"
+                                    id={listTitle}
+                                />
+                            </div>
+                        </div><br />
+                        <div className="row headerRow">
+                            <div className="col">
+                                <label>Task Title</label>
+                            </div>
+                            <div className="col-4">
+                                <label>Task Details</label>
+                            </div>
+                            <div className="col">
+                                <label>Task Status</label>
+                            </div>
+                            <div className="col">
+                                <label>Due Date</label>
+                            </div>
+                            <div className="col">
+                                <label>Action</label>
+                            </div>
+
+                        </div>
+                        {
+                            itemToRender
+                        }
+                    </div><br />
+                    {
+                        !isFormValid && <div className="errorContainer">
+                            {invaidFormField} is req field
+                        </div>
+                    }
+                    <br />
+                    <div>
+                        <button
+                            type="submit"
+                            className="btn btn-primary text-center"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                <div className="col-sm-1" />
+            </div>
+        </form >
+    );
 };
 export default CreateTaskView;
