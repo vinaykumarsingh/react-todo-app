@@ -1,26 +1,26 @@
 import React from 'react';
-import  HomeView  from "../View/HomeView";
+import HomeView from "../View/HomeView";
 import * as reactRedux from 'react-redux';
 import HomeController from "../Controller/HomeController";
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
-import {render, screen, within} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 const mockedUsedNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
-   useNavigate: () => mockedUsedNavigate,
- }));
+    useNavigate: () => mockedUsedNavigate,
+}));
 
- jest.mock("react-redux", () => ({
+jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
     useDispatch: jest.fn(),
 }));
 
 
 describe('HomeView', () => {
-    test('render home view component', ()=> {
+    test('render home view component', () => {
         const lists = [
             {
                 "id": 1,
@@ -76,8 +76,7 @@ describe('HomeView', () => {
             }
         ]
 
-        const { getAllByRole } = render(<HomeView lists = {lists} />)
-        screen.debug();
+        const { getAllByRole } = render(<HomeView lists={lists} />)
 
         const listPara = getAllByRole('list');
         expect(listPara).toHaveLength(2)
@@ -90,22 +89,19 @@ describe('HomeView', () => {
 
     });
 
-    test('render home view component with empty lists', ()=> {
+    test('render home view component with empty lists', () => {
         const lists = []
-
-        const { getByText } = render(<HomeView lists = {lists} />)
-        screen.debug();
-
+        const { getByText } = render(<HomeView lists={lists} />)
         expect(getByText('Nothing is here yet, Please Create your ToDo lists')).toBeInTheDocument();
 
-    }); 
+    });
 
 
 });
 
 describe('HomeController', () => {
     beforeEach(() => {
-        useDispatchMock.mockImplementation(() => () => {});
+        useDispatchMock.mockImplementation(() => () => { });
         useSelectorMock.mockImplementation(selector => selector(mockStore));
     })
     afterEach(() => {
@@ -141,7 +137,6 @@ describe('HomeController', () => {
         const { getAllByRole } = render(<HomeController />)
         const listItems = getAllByRole('listitem')
         expect(listItems).toHaveLength(1)
-        screen.debug();
     });
-    
+
 })

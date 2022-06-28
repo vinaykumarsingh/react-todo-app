@@ -84,7 +84,7 @@
   color: #fff;
   padding: 10px;
   border-radius: 10px;
-  margin: 0 auto;
+  margin: 0 45px;
   margin-top: 28px;
   min-height: 200px;
   margin-bottom: 20px;
@@ -269,14 +269,14 @@
   width: 200px;
 }
 
-.u-hover--sparkle {
+.listHoverEffect {
 
   box-sizing: border-box;
   position: relative;
   padding: 0.75em;
 }
 
-.u-hover--sparkle::before, .u-hover--sparkle::after {
+.listHoverEffect::before, .listHoverEffect::after {
   content: '';
   box-sizing: border-box;
   position: absolute;
@@ -287,20 +287,20 @@
   transform-origin: center;
 }
 
-.u-hover--sparkle::before {
+.listHoverEffect::before {
   border-top: 5px solid #01280f;
   border-bottom: 5px solid #01280f;
   transform: scale3d(0, 1, 1);
 }
 
-.u-hover--sparkle::after {
+.listHoverEffect::after {
   border-left: 5px solid #01280f;
   border-right: 5px solid #01280f;
   transform: scale3d(1, 0, 1);
 }
 
-.u-hover--sparkle:hover::before,
-.u-hover--sparkle:hover::after {
+.listHoverEffect:hover::before,
+.listHoverEffect:hover::after {
   transform: scale3d(1, 1, 1);
   transition: transform 900ms;
 }

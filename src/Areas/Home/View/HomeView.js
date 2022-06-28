@@ -12,7 +12,7 @@ const HomeView = ({ lists }) => {
 
     const itemsToRender = lists.map(list => {
         return (
-            <div onClick={() => listOnClickhandle(list.id)} className="listContainer u-hover--sparkle">
+            <div key={list.id.toString()} onClick={() => listOnClickhandle(list.id)} className="listContainer listHoverEffect">
 
                 <p>{list.listTitle}</p>
                 {
